@@ -5,20 +5,21 @@ import { Context, Title, Title2, Title3, ChevronLeftImage, Footer, Slider, FlexC
 import { retrieveInterpretationFromSong, retrieveSong, retrieveUser, toggleOrUpdateRankToInterpretation } from '../../../../../../../logic'
 import { verifyTokenAndRedirect, getChords, generateInterpretation, generateChordImages, calculateInterpretationRankAverage } from "../../../../../../../helpers"
 
-export default function Interpretation({ token, userId, interpretation, song, interpreterId, user }) {
+export default function Interpretation({ token, interpretation, song, user }) {
     const router = useRouter()
 
     const { handleFeedback } = useContext(Context)
 
     const [chordView, setChordView] = useState(null)
 
-    const rankByUserRetrieved = interpretation.ranks.find(rank => rank.user.toString() === userId)
+    const rankByUserRetrieved = user ? interpretation.ranks.find(rank => rank.user.toString() === user.id) : null
 
     const [rankByUser, setRankByUser] = useState(rankByUserRetrieved ? rankByUserRetrieved.amount : null)
 
     const artistName = song.artist.name
     const songName = song.name
     const username = interpretation.user.username
+    const interpreterId = interpretation.user._id
 
     const rankAverage = calculateInterpretationRankAverage(interpretation.ranks)
 
@@ -53,7 +54,7 @@ export default function Interpretation({ token, userId, interpretation, song, in
     return (
         <>
             <div className={'flex flex-col h-screen' + (chordView ? ' brightness-50' : '')}>
-                <header className="w-full bg-white px-4 pt-4 pb-1 gap-4 shadow-custom-items z-50">
+                {/* <header className="w-full bg-white px-4 pt-4 pb-1 gap-4 shadow-custom-items z-50">
                     <div className="flex flex-col gap-4">
                         <button className="w-8 h-8" onClick={onBackClick} >
                             <ChevronLeftImage />
@@ -74,14 +75,38 @@ export default function Interpretation({ token, userId, interpretation, song, in
                                     className="w-12 h-12 rounded-full"
                                     src={`http://localhost:8080/api/users/${interpreterId}/image`}
                                 />
-                                <Title3 className="mb-3">{username}</Title3>
+                                <Title3>{username}</Title3>
                             </a>
                         </Link>
+                    </div>
+                </header> */}
+
+                <header className="w-full bg-white pb-4 pr-4 pt-4 shadow-custom-items z-50">
+                    <div className="w-full flex justify-between">
+                        <div className="w-full flex">
+                            <button className="w-8 h-8" onClick={onBackClick} >
+                                <ChevronLeftImage />
+                            </button>
+                            <h1 className="text-xl text-myblack font-bold flex items-center">{song.name}</h1>
+                        </div>
+                        <SaveFavoriteImage className="w-8 h-8" />
                     </div>
                 </header>
 
                 <div className="bg-primary flex-1 overflow-y-auto ">
-                    <FlexColSection className="px-4 items-center">
+                    <FlexColSection className="p-4 items- h-fit">
+
+                        {/* ADDED */}
+                        <Link href={`/profile/${username}`}>
+                            <a className="w-fit flex items-center gap-1">
+                                <img
+                                    className="w-12 h-12 rounded-full"
+                                    src={`http://localhost:8080/api/users/${interpreterId}/image`}
+                                />
+                                <Title3>{username}</Title3>
+                            </a>
+                        </Link>
+                        {/* ADDED */}
 
                         <div className="w-full py-4 flex flex-col gap-2">
                             <h3 className="flex items-center text-xl text-myblack font-bold">Chords</h3>
@@ -126,13 +151,13 @@ export default function Interpretation({ token, userId, interpretation, song, in
                                             <p className={'font-bold leading-tight max-w-[80px]' + (rankAverage ? ' text-3xl' : ' text-md')}>{rankAverage ? rankAverage : 'Not Ranked'}</p>
                                         </div>
 
-                                        <p className="text-xs text-mygrey">Reviews</p>
+                                        <p className="text-xs text-mygrey">{`${interpretation.ranks.length} ${interpretation.ranks.length !== 1 ? 'reviews' : 'review'}`}</p>
                                     </div>
                                 </div>
                             </div>
 
-                            {userId !== interpretation.user._id &&
-                                <RankInterpretationByUser onRankClick={onRankClick} userLoggedIn={userId ? true : false} rankByUser={rankByUser} />
+                            {user && user.id !== interpreterId &&
+                                <RankInterpretationByUser onRankClick={onRankClick} userLoggedIn={user.id ? true : false} rankByUser={rankByUser} />
                             }
 
                         </div>
@@ -157,12 +182,10 @@ export async function getServerSideProps({ req, res, params: { songName, artistN
         retrieveSong(songName, artistName)
     ])
 
-    const interpreterId = interpretation.user._id
-
     if (token) {
         const user = await retrieveUser(token)
 
-        return { props: { token, user, userId, interpretation, song, interpreterId } }
+        return { props: { token, user, interpretation, song } }
 
-    } else return { props: { interpretation, song, interpreterId } }
+    } else return { props: { interpretation, song } }
 }

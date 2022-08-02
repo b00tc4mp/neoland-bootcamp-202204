@@ -8,9 +8,6 @@
 - UX/UI (not measurable)
 - Testing (2 days). - Add throw errors in tests.
 - Document functions (5 days)
-- Fix getSSProps
-- RETRIEVE INTERPRETATIONS FROM USER
-- BUSCARSE A SÍ MISMO EN EL BUSCADOR
 
 - Lists in createinterpretation --> how put them overlapping - GRID?
 

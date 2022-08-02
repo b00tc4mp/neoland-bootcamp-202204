@@ -9,6 +9,8 @@ module.exports = async userId => {
 
     if (!user) throw new NotFoundError(`user with id ${userId} not found`)
 
+    user.id = user._id.toString()
+    
     delete user._id
     delete user.__v
     delete user.password
