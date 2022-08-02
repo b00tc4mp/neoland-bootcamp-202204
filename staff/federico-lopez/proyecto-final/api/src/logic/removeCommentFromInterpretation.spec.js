@@ -33,16 +33,14 @@ describe('addCommentToInterpretation', () => {
         E5                          C5               RIFF2
         Que sentirte a mi lado me hará mucho mejor`
 
+        song = await Song.create({ artist: artist._id.toString(), name: 'A tu lado', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0), interpretations: [interpretation1] })        
+        
         comment1 = new Comment({ user: user1._id.toString(), text: 'This is the comment text' })
         comment2 = new Comment({ user: user2._id.toString(), text: 'This is comment 2' })
         comment3 = new Comment({ user: user1._id.toString(), text: 'This it comment 3'})
-
-        interpretation1 = new Interpretation({ user: user1._id, content, comments: [comment1, comment2] })
-        interpretation2 = new Interpretation({ user: user2._id, content, comments: [comment3]})
-
-        song = new Song({ artist: artist._id.toString(), name: 'A tu lado', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0), interpretations: [interpretation1] })
-
-        await song.save()
+        
+        interpretation1 = await Interpretation.create({ user: user1._id, song: song._id, content, comments: [comment1, comment2] })
+        interpretation2 = await Interpretation.create({ user: user2._id, song: song._id, content, comments: [comment3]})
     })
 
     it('succeed on existing user, artist, song, interpretation and comment', async () => {
@@ -50,12 +48,12 @@ describe('addCommentToInterpretation', () => {
 
         expect(result).to.be.undefined
 
-        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation1.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const interpretationFounded = await Interpretation.findById(interpretation1._id).populate({ path: 'comments' }).lean()
 
-        expect(songFounded.interpretations[0].comments).to.have.lengthOf(1)
-        expect(songFounded.interpretations[0].comments[0].user.toString()).to.equal(user2._id.toString())
-        expect(songFounded.interpretations[0].comments[0].text).to.equal('This is comment 2')
-        expect(songFounded.interpretations[0].comments[0].date).to.exists
+        expect(interpretationFounded.comments).to.have.lengthOf(1)
+        expect(interpretationFounded.comments[0].user.toString()).to.equal(user2._id.toString())
+        expect(interpretationFounded.comments[0].text).to.equal('This is comment 2')
+        expect(interpretationFounded.comments[0].date).to.exists
     })
 
     it('fails on comment that does not belong to the user', async () => {
@@ -69,9 +67,9 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal(`comment with id ${comment2._id.toString()} does not belong to user with id ${user1._id.toString()}`)
         }
 
-        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation1.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const interpretationFounded = await Interpretation.findById(interpretation1._id).populate({ path: 'comments' }).lean()
 
-        expect(songFounded.interpretations[0].comments).to.have.lengthOf(2)
+        expect(interpretationFounded.comments).to.have.lengthOf(2)
     })
 
     it('fails on existing user, artist, song, interpretationId, but unexisting commentId', async () => {
@@ -87,9 +85,9 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal(`comment with id ${wrongId} not found`)
         }
 
-        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation1.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const interpretationFounded = await Interpretation.findById(interpretation1._id).populate({ path: 'comments' }).lean()
 
-        expect(songFounded.interpretations[0].comments).to.have.lengthOf(2)
+        expect(interpretationFounded.comments).to.have.lengthOf(2)
     })
 
     it('fails commentId that does not belong to the interpretation', async () => {
@@ -103,9 +101,9 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal(`comment with id ${comment3._id.toString()} not found`)
         }
 
-        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation1.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const interpretationFounded = await Interpretation.findById(interpretation1._id).populate({ path: 'comments' }).lean()
 
-        expect(songFounded.interpretations[0].comments).to.have.lengthOf(2)
+        expect(interpretationFounded.comments).to.have.lengthOf(2)
     })
 
     it('fails on unexisting user', async () => {
@@ -121,9 +119,9 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal(`user with id ${wrongId} not found`)
         }
 
-        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation1.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const interpretationFounded = await Interpretation.findById(interpretation1._id).populate({ path: 'comments' }).lean()
 
-        expect(songFounded.interpretations[0].comments).to.have.lengthOf(2)
+        expect(interpretationFounded.comments).to.have.lengthOf(2)
     })
 
     afterEach(async () => {

@@ -1,5 +1,4 @@
-const { Song, Artist } = require("../models")
-const { validateObjectId } = require('../validators')
+const { Song, Artist, Interpretation } = require("../models")
 const { NotFoundError } = require('errors')
 const { validateStringNotEmptyOrBlank } = require('validators')
 
@@ -15,11 +14,13 @@ module.exports = async (songName, artistName) => {
 
     const reSong = new RegExp(songName)
 
-    const song = await Song.findOne({ name: { $regex: reSong, $options: 'i' }, artist: artist._id }).populate({ path: 'interpretations', populate: { path: 'user', select: 'username' } }).lean()
+    const song = await Song.findOne({ name: { $regex: reSong, $options: 'i' }, artist: artist._id }).lean()
 
     if (!song) throw new NotFoundError(`song ${songName} not found`)
 
-    const interpretations = song.interpretations.map(interpretation => {
+    const interpretations = await Interpretation.find({ song: song._id })
+
+    interpretations.forEach(interpretation => {
         interpretation.id = interpretation._id.toString()
 
         delete interpretation._id

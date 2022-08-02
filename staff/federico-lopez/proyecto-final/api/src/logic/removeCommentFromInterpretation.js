@@ -1,7 +1,6 @@
-const { User, Song, Artist } = require('../models')
+const { User, Song, Artist, Interpretation } = require('../models')
 const { NotFoundError, ConflictError } = require('errors')
 const { validateObjectId } = require('../validators')
-const { Types: { ObjectId } } = require('mongoose')
 
 module.exports = async (userId, songId, interpretationId, commentId) => {
     validateObjectId(userId)
@@ -21,7 +20,7 @@ module.exports = async (userId, songId, interpretationId, commentId) => {
 
     if (!artistFounded) throw new ConflictError(`artists from song with id ${songId} does not exist`)
 
-    const interpretation = songFounded.interpretations.find(interpretation => interpretation._id.toString() === interpretationId)
+    const interpretation = await Interpretation.findById(interpretationId)
 
     if(!interpretation) throw new NotFoundError(`interpretation with id ${interpretationId} not found`)
 
@@ -33,5 +32,5 @@ module.exports = async (userId, songId, interpretationId, commentId) => {
     
     interpretation.comments.splice(commentIndex, 1)
 
-    await songFounded.save()
+    await interpretation.save()
 }

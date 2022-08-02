@@ -19,8 +19,7 @@ const song = new Schema({
     },
     date: {
         type: Date
-    },
-    interpretations: [interpretation]
+    }
 })
 
 module.exports = song

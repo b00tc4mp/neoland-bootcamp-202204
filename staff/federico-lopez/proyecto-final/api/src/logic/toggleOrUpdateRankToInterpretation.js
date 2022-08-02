@@ -1,4 +1,4 @@
-const { User, Artist, Song, Rank } = require('../models')
+const { User, Artist, Song, Rank, Interpretation } = require('../models')
 const { NotFoundError, ConflictError } = require('errors')
 const { validateRank } = require('validators')
 const { validateObjectId } = require('../validators')
@@ -20,30 +20,30 @@ module.exports = async (userId, songId, interpretationId, amount) => {
     const artistFounded = await Artist.findById(songFounded.artist)
 
     if (!artistFounded) throw new ConflictError(`artists from song with id ${songId} does not exist`)
-    
-    const indexOfInterpretation = songFounded.interpretations.findIndex(interpretation => interpretation._id.toString() === interpretationId)
 
-    if (indexOfInterpretation === -1) throw new NotFoundError(`interpretation with id ${interpretationId} not found`)
+    const interpretation = await Interpretation.findById(interpretationId)
 
-    if(songFounded.interpretations[indexOfInterpretation].user.toString() === userId) throw new ConflictError(`user with id ${userId} is not allowed to rank his own interpretation with id ${interpretationId}`)
+    if (!interpretation) throw new NotFoundError(`interpretation with id ${interpretationId} not found`)
 
-    const indexOfRank = songFounded.interpretations[indexOfInterpretation].ranks.findIndex(rank => rank.user.toString() === userId)
+    if (interpretation.user.toString() === userId) throw new ConflictError(`user with id ${userId} is not allowed to rank his own interpretation with id ${interpretationId}`)
+
+    const indexOfRank = interpretation.ranks.findIndex(rank => rank.user.toString() === userId)
 
     if (indexOfRank !== -1) {
-        if (songFounded.interpretations[indexOfInterpretation].ranks[indexOfRank].amount === amount) {
-            songFounded.interpretations[indexOfInterpretation].ranks.splice(indexOfRank, 1)
+        if (interpretation.ranks[indexOfRank].amount === amount) {
+            interpretation.ranks.splice(indexOfRank, 1)
 
             await songFounded.save()
-            
+
             return
         }
 
-        songFounded.interpretations[indexOfInterpretation].ranks.splice(indexOfRank, 1)
+        interpretation.ranks.splice(indexOfRank, 1)
     }
 
     const rank = new Rank({ user: userId, amount: amount })
 
-    songFounded.interpretations[indexOfInterpretation].ranks.push(rank)
+    interpretation.ranks.push(rank)
 
-    await songFounded.save()
+    await interpretation.save()
 }

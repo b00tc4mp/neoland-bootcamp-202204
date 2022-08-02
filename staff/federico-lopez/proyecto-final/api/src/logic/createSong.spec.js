@@ -39,8 +39,6 @@ describe('createSong', () => {
             expect(createdSong.artist.toString()).to.equal(laRengaId.toString())
             expect(createdSong.genres[0]).to.equal(Song.ROCK)
             expect(createdSong.album).to.equal('Detonador de sueños')
-            expect(createdSong.interpretations).to.be.instanceOf(Array)
-            expect(createdSong.interpretations).to.have.length(0)
         })
 
         it('succeeds on new song with two genres', async () => {
@@ -56,8 +54,6 @@ describe('createSong', () => {
             expect(createdSong.genres[0]).to.equal(Song.ROCK)
             expect(createdSong.genres[1]).to.equal(Song.PUNK)
             expect(createdSong.album).to.equal('Detonador de sueños')
-            expect(createdSong.interpretations).to.be.instanceOf(Array)
-            expect(createdSong.interpretations).to.have.length(0)
         })
     })
 

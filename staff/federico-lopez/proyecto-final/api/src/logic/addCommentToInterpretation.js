@@ -1,4 +1,4 @@
-const { User, Artist, Song, Comment } = require('../models')
+const { User, Artist, Song, Comment, Interpretation } = require('../models')
 const { NotFoundError, ConflictError } = require('errors')
 const { validateStringNotEmptyOrBlank, validateObject } = require('validators')
 const { validateObjectId } = require('../validators')
@@ -22,7 +22,7 @@ module.exports = async (userId, songId, interpretationId, text) => {
 
     if (!artistFounded) throw new ConflictError(`artists from song with id ${songId} does not exist`)
 
-    const interpretation = songFounded.interpretations.find(interpretation => interpretation._id.toString() === interpretationId)
+    const interpretation = await Interpretation.findById(interpretationId)
 
     if(!interpretation) throw new NotFoundError(`interpretation with id ${interpretationId} not found`)
 
@@ -30,7 +30,7 @@ module.exports = async (userId, songId, interpretationId, text) => {
 
     interpretation.comments.push(comment)
 
-    await songFounded.save()
+    await interpretation.save()
 
     return comment._id.toString()
 }

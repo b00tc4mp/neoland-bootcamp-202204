@@ -32,11 +32,10 @@ describe('addCommentToInterpretation', () => {
         E5                          C5               RIFF2
         Que sentirte a mi lado me hará mucho mejor`
 
-        interpretation = new Interpretation({ user: user._id, content })
-
-        song = new Song({ artist: artist._id.toString(), name: 'A tu lado', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0), interpretations: [interpretation] })
-
-        await song.save()
+        
+        song = await Song.create({ artist: artist._id.toString(), name: 'A tu lado', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0), interpretations: [interpretation] })
+        
+        interpretation = await Interpretation.create({ user: user._id, song: song._id, content })
     })
 
     it('succeed on existing user, artist, song and interpretation', async () => {
@@ -46,12 +45,12 @@ describe('addCommentToInterpretation', () => {
 
         validateObjectId(commentId)
 
-        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const interpretationFounded = await Interpretation.findById(interpretation._id).populate({ path: 'comments' }).lean()
 
-        expect(songFounded.interpretations[0].comments).to.have.lengthOf(1)
-        expect(songFounded.interpretations[0].comments[0].user.toString()).to.equal(user._id.toString())
-        expect(songFounded.interpretations[0].comments[0].text).to.equal(commentText)
-        expect(songFounded.interpretations[0].comments[0].date).to.exists
+        expect(interpretationFounded.comments).to.have.lengthOf(1)
+        expect(interpretationFounded.comments[0].user.toString()).to.equal(user._id.toString())
+        expect(interpretationFounded.comments[0].text).to.equal(commentText)
+        expect(interpretationFounded.comments[0].date).to.exists
     })
 
     it('fails on existing user, artist, song and interpretation, but empty text', async () => {
@@ -65,9 +64,9 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal('comment is empty')
         }
 
-        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const interpretationFounded = await Interpretation.findById(interpretation._id).populate({ path: 'comments' }).lean()
 
-        expect(songFounded.interpretations[0].comments).to.have.lengthOf(0)
+        expect(interpretationFounded.comments).to.have.lengthOf(0)
     })
 
     it('fails on existing user, artist and song, but unexisting interpretationId', async () => {
@@ -83,9 +82,9 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal(`interpretation with id ${wrongId} not found`)
         }
 
-        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const interpretationFounded = await Interpretation.findById(interpretation._id).populate({ path: 'comments' }).lean()
 
-        expect(songFounded.interpretations[0].comments).to.have.lengthOf(0)
+        expect(interpretationFounded.comments).to.have.lengthOf(0)
     })
 
     it('fails on unexisting user', async () => {
@@ -101,9 +100,9 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal(`user with id ${wrongId} not found`)
         }
 
-        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const interpretationFounded = await Interpretation.findById(interpretation._id).populate({ path: 'comments' }).lean()
 
-        expect(songFounded.interpretations[0].comments).to.have.lengthOf(0)
+        expect(interpretationFounded.comments).to.have.lengthOf(0)
     })
 
     afterEach(async () => {

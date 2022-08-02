@@ -1,5 +1,5 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { User, Artist, Song } = require('../models')
+const { User, Artist, Song, Interpretation } = require('../models')
 const { NotFoundError, FormatError } = require('errors')
 const { addInterpretationToSong } = require('.')
 const { expect } = require('chai')
@@ -103,10 +103,11 @@ describe('addInterpretationToSong', () => {
 
                 validateObjectId(result)
 
-                const savedSong = await Song.findById(song._id)
+                const savedInterpretation = await Interpretation.findById(result)
 
-                expect(savedSong.interpretations).to.have.length(1)
-                expect(savedSong.interpretations[0].content).to.equal(content)
+                expect(savedInterpretation.user.toString()).to.equal(user._id.toString())
+                expect(savedInterpretation.song.toString()).to.equal(song._id.toString())
+                expect(savedInterpretation.content).to.equal(content)
             })
 
             it('fails on content with less than 200 characters', async () => {

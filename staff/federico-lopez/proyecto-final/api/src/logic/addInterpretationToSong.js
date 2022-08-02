@@ -20,11 +20,9 @@ module.exports = async (userId, songId, content) => {
 
     if(!artistFounded) throw new ConflictError(`artists from song with id ${songId} does not exist`)
         
-    const interpretation = new Interpretation({ user: userId, content })
+    const interpretation = new Interpretation({ user: userId, song: songId, content })
 
-    songFounded.interpretations.push(interpretation)
-
-    await songFounded.save()
+    await interpretation.save()
     
     return interpretation._id.toString()
 }

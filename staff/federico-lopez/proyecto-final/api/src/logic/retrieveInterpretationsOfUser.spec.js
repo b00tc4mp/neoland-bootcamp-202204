@@ -33,18 +33,13 @@ describe('retrieveInterpretationsOfUser', () => {
         E5                          C5               RIFF2
         Que sentirte a mi lado me hará mucho mejor`
 
-        interpretation1 = new Interpretation({ user: user1._id, content })
-        interpretation2 = new Interpretation({ user: user2._id, content })
-        interpretation3 = new Interpretation({ user: user1._id, content })
-        interpretation4 = new Interpretation({ user: user1._id, content })
-
-
-        song1 = new Song({ artist: artist._id.toString(), name: 'A tu lado', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0), interpretations: [interpretation1, interpretation2, interpretation3] })
-        song2 = new Song({ artist: artist._id.toString(), name: 'La razón que te demora', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0), interpretations: [interpretation4] })
-
-
-        await song1.save()
-        await song2.save()
+        song1 = await Song.create({ artist: artist._id.toString(), name: 'A tu lado', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0)})
+        song2 = await Song.create({ artist: artist._id.toString(), name: 'La razón que te demora', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0)})
+        
+        interpretation1 = await Interpretation.create({ user: user1._id, song: song1._id, content })
+        interpretation2 = await Interpretation.create({ user: user2._id, song: song1._id, content })
+        interpretation3 = await Interpretation.create({ user: user1._id, song: song1._id, content })
+        interpretation4 = await Interpretation.create({ user: user1._id, song: song2._id, content })
     })
 
     it('succeed on existing user, artist, song and interpretations', async () => {
@@ -54,7 +49,7 @@ describe('retrieveInterpretationsOfUser', () => {
         expect(result).to.have.lengthOf(3)
 
         result.forEach(interpretation => {
-            expect(interpretation.user.id).to.equal(user1._id.toString())
+            expect(interpretation.user).to.equal(user1._id.toString())
             expect(interpretation.content).to.equal(interpretation1.content)
             expect(interpretation.songName).to.be.string
             expect(interpretation.artistName).to.be.string

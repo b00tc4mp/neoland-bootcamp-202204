@@ -1,9 +1,8 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Artist, Song, Interpretation } = require('../models')
-const { NotFoundError, AuthError, FormatError } = require('errors')
+const { NotFoundError } = require('errors')
 const { removeInterpretationFromSong } = require('./')
 const { expect } = require('chai')
-const { validateObjectId } = require('../validators')
 
 describe('removeInterpretationFromSong', () => {
 
@@ -31,9 +30,8 @@ describe('removeInterpretationFromSong', () => {
 
         user = await User.create({ username: 'wendypan', email: 'wendypan@gmail.com', password: 'Passw0rd' })
         artist = await Artist.create({ name: 'La Renga', genres: [Artist.ROCK], country: 'AR' })
-        interpretation = new Interpretation({ content: interpretationContent })
-        debugger
         song = await Song.create({ artist: artist._id.toString(), name: 'A tu lado', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0), interpretations: [interpretation] })
+        interpretation = await Interpretation.create({ user: user._id.toString(), song: song._id.toString(), content: interpretationContent })
     })
 
     it('fails on incorrect user', async () => {
@@ -81,9 +79,9 @@ describe('removeInterpretationFromSong', () => {
 
         expect(result).to.be.undefined
 
-        const savedSong = await Song.findById(song._id)
+        const removedInterpretation = await Interpretation.findById(interpretation._id)
 
-        expect(savedSong.interpretations).to.have.length(0)
+        expect(removedInterpretation).to.be.null
     })
 
     afterEach(async () => {

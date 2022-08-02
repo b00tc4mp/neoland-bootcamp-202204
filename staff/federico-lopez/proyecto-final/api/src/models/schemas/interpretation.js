@@ -8,6 +8,11 @@ const interpretation = new Schema({
         require: true,
         ref: 'User'
     },
+    song: {
+        type: ObjectId,
+        require: true,
+        ref: 'Song'
+    },
     content: {
         type: String,
         required: true,

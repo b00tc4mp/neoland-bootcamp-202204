@@ -1,5 +1,5 @@
 const { NotFoundError } = require('errors')
-const { User, Song } = require('../models')
+const { User, Interpretation } = require('../models')
 const { validateObjectId } = require('../validators')
 
 module.exports = async (userId) => {
@@ -8,26 +8,27 @@ module.exports = async (userId) => {
     const user = await User.findById(userId)
 
     if (!user) throw new NotFoundError(`user with id ${userId} not found`)
+    debugger
 
-    const songs = await Song.find({ 'interpretations.user': userId }).populate('artist').lean()
+    const interpretations = await Interpretation.find({ user: userId }).populate({ path: 'song', populate: { path: 'artist' } }).lean()
 
-    const interpretations = []
+    interpretations.forEach(interpretation => {
+        interpretation.id = interpretation._id.toString()
+        interpretation.user = interpretation.user.toString()
+        interpretation.songName = interpretation.song.name
+        interpretation.songId = interpretation.song._id.toString()
+        interpretation.artistName = interpretation.song.artist.name
+        interpretation.artistId = interpretation.song.artist._id.toString()
 
-    songs.forEach(song => {
-        const userInterpretations = song.interpretations.filter(interpretation => interpretation.user.toString() === userId)
-
-        userInterpretations.forEach(interpretation => {
-            interpretation.id = interpretation._id.toString()
-            interpretation.user = interpretation.user.toString()
-            interpretation.songName = song.name
-            interpretation.songId = song._id.toString()
-            interpretation.artistName = song.artist.name
-            interpretation.artistId = song.artist._id.toString()
-
-            delete interpretation._id
-
-            interpretations.push(interpretation)
-        })
+        delete interpretation._id
     })
+
+    // // interpretations.forEach(interpretation => {
+    // //     delete interpretation.song._id
+    // //     delete interpretation.artist._id
+    // //     delete interpretation.user._id
+
+    // })
+
     return interpretations
 }
