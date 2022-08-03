@@ -1,17 +1,15 @@
-import { FlexColSection, Footer, Header, Context, Title2 } from "../components"
+import { FlexColSection, Footer, Header, Context, Title2, InterpretationProfileItem } from "../components"
 import { verifyTokenAndRedirect } from "../helpers"
-import { checkSpotifySession, getTopArtists, retrieveUser } from '../logic'
+import { checkSpotifySession, getTopArtists, retrieveUser, retrieveLastInterpretationsOfFollowed } from '../logic'
 import { useContext, useState } from "react"
 import Link from "next/link";
 
-export default function Home({ isSessionActive, topArtists, user }) {
+export default function Home({ isSessionActive, topArtists, user, interpretationsOfFollowed }) {
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const { handleDialog } = useContext(Context)
 
-  const handleOnCloseDialog = () => {
-    setDialogOpen('close')
-  }
+  const handleOnCloseDialog = () => setDialogOpen('close')
 
   if (user && !dialogOpen && !isSessionActive) {
     handleDialog({
@@ -55,10 +53,25 @@ export default function Home({ isSessionActive, topArtists, user }) {
             </ul>
           </div>
         }
-      </FlexColSection>
+
+        {interpretationsOfFollowed && interpretationsOfFollowed.length > 0 &&
+          <div className="py-4 w-full flex flex-col gap-2">
+            <h2 className="px-4 text-xl font-bold text-mygrey">Recent versions from your contacts</h2>
+
+            <ul className="h-48 px-4 flex flex-col items-center overflow-x-auto scrollbar-hide gap-2">
+
+              {interpretationsOfFollowed.map(interpretation => {
+                return <InterpretationProfileItem interpretation={interpretation} user={interpretation.user} />                
+              })}
+
+            </ul>
+          </div>
+        }
+
+      </FlexColSection >
 
       <Footer user={user} page="home" />
-    </div>
+    </div >
   )
 }
 
@@ -70,15 +83,18 @@ export async function getServerSideProps(ctx) {
   if (token) {
     const user = await retrieveUser(token)
 
+    
+    const interpretationsOfFollowed = await retrieveLastInterpretationsOfFollowed(token)
+
     if (ctx.query.code) {
       const isSessionActive = await checkSpotifySession(token, ctx.query.code)
 
       if (isSessionActive) {
         const topArtists = await getTopArtists(token)
 
-        return { props: { topArtists, isSessionActive, user } }
+        return { props: { topArtists, isSessionActive, user, interpretationsOfFollowed } }
 
-      } else return { props: { isSessionActive, user } }
+      } else return { props: { isSessionActive, user, interpretationsOfFollowed } }
 
     } else {
       const isSessionActive = await checkSpotifySession(token)
@@ -86,9 +102,9 @@ export async function getServerSideProps(ctx) {
       if (isSessionActive) {
         const topArtists = await getTopArtists(token)
 
-        return { props: { topArtists, isSessionActive, user } }
+        return { props: { topArtists, isSessionActive, user, interpretationsOfFollowed } }
 
-      } else return { props: { isSessionActive, user } }
+      } else return { props: { isSessionActive, user, interpretationsOfFollowed } }
     }
 
   } else return { props: {} }

@@ -1,14 +1,14 @@
 import Link from 'next/link'
 import { useState } from "react"
-import { CrossGreyImage, Slider, RankInterpretationByUser } from '../../../../../../../components'
-import { retrieveInterpretationFromSong, retrieveSong } from '../../../../../../../logic'
+import { CrossGreyImage, Slider } from '../../../../../../../components'
+import { retrieveInterpretationFromSong } from '../../../../../../../logic'
 import { generateInterpretation, generateChordImages } from "../../../../../../../helpers"
 
-export default function FullScreenInterpretation({ interpretation, song }) {
+export default function FullScreenInterpretation({ interpretation }) {
     const [chordView, setChordView] = useState(null)
 
-    const songName = song.name
-    const artistName = song.artist.name
+    const songName = interpretation.song.name
+    const artistName = interpretation.song.artist.name
 
     const onChordClick = chord => setChordView(chord)
 
@@ -39,10 +39,7 @@ export default function FullScreenInterpretation({ interpretation, song }) {
 }
 
 export async function getServerSideProps({ params: { songName, artistName, interpretationId } }) {
-    const [interpretation, song] = await Promise.all([
-        retrieveInterpretationFromSong(songName, artistName, interpretationId),
-        retrieveSong(songName, artistName)
-    ])
+    const interpretation = await retrieveInterpretationFromSong(songName, artistName, interpretationId)
 
-    return { props: { interpretation, song } }
+    return { props: { interpretation } }
 }

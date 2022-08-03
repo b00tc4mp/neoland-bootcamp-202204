@@ -1,13 +1,10 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import { useState, useContext } from "react"
-import { Context, Title, Title2, Title3, ChevronLeftImage, Footer, Slider, FlexColSection, InterpretationIconImage, SaveFavoriteImage, CircleChordButton, ExpandImage, RateYellowFullImage, RankInterpretationByUser } from '../../../../../../../components'
-import { retrieveInterpretationFromSong, retrieveSong, retrieveUser, toggleOrUpdateRankToInterpretation } from '../../../../../../../logic'
+import { Context, Title3, ChevronLeftImage, Footer, Slider, FlexColSection, SaveFavoriteImage, CircleChordButton, ExpandImage, RateYellowFullImage, RankInterpretationByUser } from '../../../../../../../components'
+import { retrieveInterpretationFromSong, retrieveUser, toggleOrUpdateRankToInterpretation } from '../../../../../../../logic'
 import { verifyTokenAndRedirect, getChords, generateInterpretation, generateChordImages, calculateInterpretationRankAverage } from "../../../../../../../helpers"
 
-export default function Interpretation({ token, interpretation, song, user }) {
-    const router = useRouter()
-
+export default function Interpretation({ token, interpretation, user }) {
     const { handleFeedback } = useContext(Context)
 
     const [chordView, setChordView] = useState(null)
@@ -16,14 +13,14 @@ export default function Interpretation({ token, interpretation, song, user }) {
 
     const [rankByUser, setRankByUser] = useState(rankByUserRetrieved ? rankByUserRetrieved.amount : null)
 
-    const artistName = song.artist.name
-    const songName = song.name
+    const artistName = interpretation.song.artist.name
+    const songId = interpretation.song.id
+    const songName = interpretation.song.name
     const username = interpretation.user.username
+    
     const interpreterId = interpretation.user._id
 
     const rankAverage = calculateInterpretationRankAverage(interpretation.ranks)
-
-    const onBackClick = () => router.back()
 
     const onChordClick = chord => setChordView(chord)
 
@@ -31,7 +28,7 @@ export default function Interpretation({ token, interpretation, song, user }) {
 
     const onRankClick = async amount => {
         try {
-            await toggleOrUpdateRankToInterpretation(token, song.id, interpretation.id, amount)
+            await toggleOrUpdateRankToInterpretation(token, songId, interpretation.id, amount)
 
             if (rankByUser === amount) {
                 handleFeedback('success', 'Rate', `You have deleted your previous rating`)
@@ -84,10 +81,12 @@ export default function Interpretation({ token, interpretation, song, user }) {
                 <header className="w-full bg-white pb-4 pr-4 pt-4 shadow-custom-items z-50">
                     <div className="w-full flex justify-between">
                         <div className="w-full flex">
-                            <button className="w-8 h-8" onClick={onBackClick} >
-                                <ChevronLeftImage />
-                            </button>
-                            <h1 className="text-xl text-myblack font-bold flex items-center">{song.name}</h1>
+                            <Link href={`/artist/${artistName}/song/${songName}`}>
+                                <a className="w-8 h-8 flex justify-center align-center">
+                                    <ChevronLeftImage />
+                                </a>
+                            </Link>
+                            <h1 className="text-xl text-myblack font-bold flex items-center">{songName}</h1>
                         </div>
                         <SaveFavoriteImage className="w-8 h-8" />
                     </div>
@@ -177,15 +176,12 @@ export default function Interpretation({ token, interpretation, song, user }) {
 export async function getServerSideProps({ req, res, params: { songName, artistName, interpretationId } }) {
     const token = await verifyTokenAndRedirect(req, res)
 
-    const [interpretation, song] = await Promise.all([
-        retrieveInterpretationFromSong(songName, artistName, interpretationId),
-        retrieveSong(songName, artistName)
-    ])
+    const interpretation = await retrieveInterpretationFromSong(songName, artistName, interpretationId)
 
     if (token) {
         const user = await retrieveUser(token)
 
-        return { props: { token, user, interpretation, song } }
+        return { props: { token, user, interpretation } }
 
-    } else return { props: { interpretation, song } }
+    } else return { props: { interpretation } }
 }

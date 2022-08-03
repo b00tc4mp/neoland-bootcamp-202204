@@ -149,7 +149,7 @@ export default function CreateInterpretation({ token, user }) {
     const onEditInterpretation = async () => setPreview(false)
 
     const onSubmitInterpretation = async event => {
-        debugger
+        
         event.preventDefault()
 
         try {

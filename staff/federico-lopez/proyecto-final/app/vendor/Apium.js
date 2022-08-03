@@ -75,7 +75,7 @@ class Apium {
                     if (status === 404) {
                         const error = JSON.parse(payload)
 
-                        if (error.includes('//www.herokucdn.com/error-pages/no-such-app.html')) {
+                        if (typeof error === 'string' && error.includes('//www.herokucdn.com/error-pages/no-such-app.html')) {
                             console.log('call recursive used')
                             callRecursive(method, urlOrPath, options)
                         }

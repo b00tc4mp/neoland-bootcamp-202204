@@ -2,9 +2,6 @@ import Link from "next/link";
 const querystring = require('query-string');
 
 export function Dialog({ level, title, description, button1, button2, onCloseClick, onCloseDialog }) {
-    const client_id = 'b7ecd28f242443eb8ab8fd656dea2659'
-    const redirect_uri = 'https://pitch-us.vercel.app/'
-
     const state = Math.random() * 10000;
     const scope = 'user-read-private user-read-email user-top-read user-read-recently-played user-read-playback-position playlist-read-collaborative user-read-playback-state user-follow-read user-read-currently-playing user-library-read playlist-read-private'
 
@@ -18,9 +15,9 @@ export function Dialog({ level, title, description, button1, button2, onCloseCli
 
                 <Link href={`https://accounts.spotify.com/authorize?${querystring.stringify({
                     response_type: 'code',
-                    client_id: client_id,
+                    client_id: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID,
                     scope: scope,
-                    redirect_uri: redirect_uri,
+                    redirect_uri: process.env.NEXT_PUBLIC_SPOTIFY_REDIRECT_URI,
                     state: state
                 })}`} >
                     <a className="w-full p-4 rounded-full bg-mygreen text-white flex justify-center items-center"
@@ -31,7 +28,7 @@ export function Dialog({ level, title, description, button1, button2, onCloseCli
                 <button
                     className="w-full p-4 text-myblue flex justify-center items-center"
                     onClick={function () {
-                        debugger
+                        
                         onCloseClick()
                         onCloseDialog()
                     }}

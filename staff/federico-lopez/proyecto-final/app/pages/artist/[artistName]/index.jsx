@@ -19,9 +19,7 @@ export default function Artist({ songs, user }) {
             handleFeedback('info', 'Login needed', 'You should log in to create an interpretation')
     }
 
-    const onBackClick = () => {
-        router.back()
-    }
+    const onBackClick = () => router.back()
 
     const onFavoriteClick = () => likedArtist === false ? setLikedArtist(true) : setLikedArtist(false)
 

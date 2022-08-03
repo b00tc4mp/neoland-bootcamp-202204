@@ -3,7 +3,7 @@ import imageCompression from 'browser-image-compression'
 import Apium from '../vendor/Apium'
 
 export async function updateUserImage(token, file) {
-    debugger
+    
     validateJWT(token)
     validateFile(file)
 

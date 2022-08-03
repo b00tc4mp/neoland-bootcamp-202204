@@ -3,25 +3,24 @@ import { verifyTokenAndRedirect } from '../../../../../helpers'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { Title, Title2, Title3, ChevronLeftImage, SongIconImage, FavoriteImage, Footer, FlexColSection, InterpretationsList, Tag, ButtonBlue, Context } from '../../../../../components'
-import { retrieveSong, retrieveInterpretationsFromSong, retrieveUser } from '../../../../../logic'
+import { retrieveInterpretationsFromSong, retrieveUser } from '../../../../../logic'
 
-export default function Song({ interpretations, song, user }) {
+export default function Song({ interpretations, user }) {
     const router = useRouter()
 
     const { handleFeedback } = useContext(Context)
 
     const [likedSong, setLikedSong] = useState(false)
 
-    const artistName = song.artist.name
+    const artistName = interpretations[0].song.artist.name
+    const songName = interpretations[0].song.name
 
     const handleOnNewInterpretationClick = () => {
         if (!user)
             handleFeedback('info', 'Login needed', 'You should log in to create an interpretation')
     }
 
-    const onBackClick = () => {
-        router.back()
-    }
+    const onBackClick = () => router.back()
 
     const onFavoriteClick = () => likedSong === false ? setLikedSong(true) : setLikedSong(false)
 
@@ -36,7 +35,7 @@ export default function Song({ interpretations, song, user }) {
                         <Title2>Song</Title2>
                     </div>
                     <div className="flex justify-between items-center">
-                        <Title>{song.name}</Title>
+                        <Title>{songName}</Title>
                         <FavoriteImage className="w-6 h-6 -mb-1" full={likedSong} onClick={onFavoriteClick} />
                     </div>
                 </div>
@@ -73,7 +72,7 @@ export default function Song({ interpretations, song, user }) {
 
 
                 {interpretations.length > 0 &&
-                    <InterpretationsList interpretations={interpretations} artistName={artistName} songName={song.name} />
+                    <InterpretationsList interpretations={interpretations} artistName={artistName} songName={songName} />
                 }
 
                 {interpretations.length === 0 && <p>There are not available interpretations for this song</p>}
@@ -87,16 +86,13 @@ export default function Song({ interpretations, song, user }) {
 export async function getServerSideProps({ params, req, res }) {
     const token = await verifyTokenAndRedirect(req, res)
 
-    const [interpretations, song] = await Promise.all([
-        retrieveInterpretationsFromSong(params.songName, params.artistName),
-        retrieveSong(params.songName, params.artistName)
-    ])
-
+    const interpretations = await retrieveInterpretationsFromSong(params.songName, params.artistName)
+    
     if (token) {
         const user = await retrieveUser(token)
 
-        return { props: { token, user, song, interpretations } }
+        return { props: { token, user, interpretations } }
 
-    } else return { props: { song, interpretations } }
+    } else return { props: { interpretations } }
 }
 

@@ -7,7 +7,7 @@ export default function UploadPhoto({ token }) {
     const [file, setFile] = useState({ isTypeAllowed: true, isSizeAllowed: true, size: null })
 
     const handleFileChange = event => {
-        debugger
+        
         const fileUpload = event.target.files[0]
 
         const { isTypeAllowed, isSizeAllowed } = verifyFile(fileUpload)

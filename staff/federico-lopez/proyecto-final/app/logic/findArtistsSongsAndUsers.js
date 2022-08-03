@@ -5,7 +5,7 @@ export const findArtistsSongsAndUsers = (() => {
     let _query, _category, _results
 
     return async function(query, category) {
-        debugger
+        
         validateStringNotEmptyOrBlank(query)
         validateStringNotEmptyOrBlank(category)
 
