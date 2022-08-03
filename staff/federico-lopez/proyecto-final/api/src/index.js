@@ -39,6 +39,7 @@ const {
     handleAddInterpretationToSong,
     handleRetrieveInterpretationsFromSong,
     handleRetrieveInterpretationFromSong,
+    handleRetrieveLastInterpretationsOfFollowed,
 
     /* RANK */
     handleToggleOrUpdateRankToInterpretation,
@@ -113,6 +114,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.post('/songs/:songId/interpretations', jsonBodyParser, handleAddInterpretationToSong)
         routes.get('/artists/:artistName/songs/:songName/interpretations', handleRetrieveInterpretationsFromSong)
         routes.get('/artists/:artistNae/songs/:songName/interpretations/:interpretationId', handleRetrieveInterpretationFromSong)
+        routes.get('/interpretations/followed', handleRetrieveLastInterpretationsOfFollowed)
         
         /* ARTISTS AND SONGS */
         routes.get('/search', handleFindArtistsSongsAndUsers)

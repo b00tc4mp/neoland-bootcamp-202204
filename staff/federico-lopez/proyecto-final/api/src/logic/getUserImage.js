@@ -5,7 +5,7 @@ const { createReadStream } = require('fs')
 
 module.exports = async (userId, outputStream) => {
     validateObjectId(userId)
-    debugger
+    
 
     const user = await User.findById(userId)
 

@@ -23,6 +23,7 @@ const interpretation = new Schema({
         required: true,
         default: Date.now
     },
+    visits: [Date],
     ranks: [rank],
     comments: [comment]
 })

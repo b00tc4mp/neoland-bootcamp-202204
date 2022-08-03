@@ -2,7 +2,7 @@ const { checkSpotifySession } = require('../logic')
 const { handleErrorsAndRespond, verifyToken } = require('./helpers')
 
 module.exports = async (req, res) => {
-    debugger
+    
     try {
         const userId = verifyToken(req)
 

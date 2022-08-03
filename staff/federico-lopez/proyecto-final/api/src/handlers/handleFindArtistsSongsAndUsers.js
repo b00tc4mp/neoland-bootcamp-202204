@@ -3,7 +3,7 @@ const { handleErrorsAndRespond } = require('./helpers')
 
 module.exports = async (req, res) => {
     try {
-        debugger
+        
         const { query: { q: query, category } } = req
 
         const results = await findArtistsSongsAndUsers(query, category)

@@ -43,7 +43,7 @@ module.exports = (userId, contentType, inputStream) => {
             })
 
             firebaseStream.on('finish', async () => {
-                debugger
+                
 
                 const user = await User.findById(userId)
 

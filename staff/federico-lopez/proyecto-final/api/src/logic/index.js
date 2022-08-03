@@ -32,6 +32,7 @@ module.exports = {
     retrieveInterpretationsFromSong: require('./retrieveInterpretationsFromSong'),
     retrieveInterpretationFromSong: require('./retrieveInterpretationFromSong'),
     removeInterpretationFromSong: require('./removeInterpretationFromSong'),
+    retrieveLastInterpretationsOfFollowed: require('./retrieveLastInterpretationsOfFollowed'),
 
     /* RANK */
     toggleOrUpdateRankToInterpretation: require('./toggleOrUpdateRankToInterpretation'),

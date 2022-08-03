@@ -1,9 +1,8 @@
 const { validateObjectId } = require('../validators')
-const { User } = require('../models')
+const { User, Interpretation } = require('../models')
 const { NotFoundError } = require('errors')
 
-module.exports = async userIdd => {
-    const userId = '62e5041bbd9bacd7b8921b9d'
+module.exports = async userId => {
     validateObjectId(userId)
 
     const user = await User.findById(userId)
@@ -12,24 +11,32 @@ module.exports = async userIdd => {
 
     const followingUsers = user.following
 
-    const songs = await Song.find({ 'interpretations.user': { $in: followingUsers } }).populate('artist').lean()
+    if (followingUsers.length === 0) return []
 
-    const interpretations = []
+    const interpretations = await Interpretation.find({ user: { $in: followingUsers } }).populate({ path: 'song', populate: { path: 'artist' } }).lean()
+        .populate({ path: 'song', populate: { path: 'artist' } })
+        .populate({ path: 'user', select: 'username' })
+        .sort({ date: -1 })
+        .limit(5)
+        .lean()
 
-    songs.forEach(song => {
-        const userInterpretations = song.interpretations.filter(interpretation => followingUsers.includes(interpretation.user))
+    interpretations.forEach(interpretation => {
+        interpretation.id = interpretation._id.toString()
+        interpretation.user.id = interpretation.user._id.toString()
+        interpretation.song.id = interpretation.song._id.toString()
+        interpretation.song.artist.id = interpretation.song.artist._id.toString()
 
-        userInterpretations.forEach(interpretation => {
-            interpretation.id = interpretation._id.toString()
-            interpretation.user = interpretation.user.toString()
-            interpretation.songName = song.name
-            interpretation.songId = song._id.toString()
-            interpretation.artistName = song.artist.name
-            interpretation.artistId = song.artist._id.toString()
+        delete interpretation._id
+        delete interpretation.__v
+    })
 
-            delete interpretation._id
+    interpretations.forEach(interpretation => {
+        delete interpretation.song.__v
+        delete interpretation.song.artist.__v
+        delete interpretation.user._id
+        delete interpretation.song._id
+        delete interpretation.song.artist._id
+    })
 
-            interpretations.push(interpretation)
-        })
-    })                                                           
+    return interpretations
 }

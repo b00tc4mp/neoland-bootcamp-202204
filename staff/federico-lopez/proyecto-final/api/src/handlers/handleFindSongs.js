@@ -4,7 +4,7 @@ const { handleErrorsAndRespond } = require('./helpers')
 module.exports = async (req, res) => {
     try {
         const { query: { q: query } } = req
-        debugger
+        
         const songsResults = await retrieveSongs(query)
         
         res.status(200).json(songsResults)

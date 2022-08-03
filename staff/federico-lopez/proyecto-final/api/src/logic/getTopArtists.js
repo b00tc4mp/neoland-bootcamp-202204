@@ -4,7 +4,7 @@ const { User, Artist } = require('../models')
 const Apium = require('../vendor/Apium')
 
 module.exports = async (userId, access_token) => {
-    debugger
+    
     validateObjectId(userId)
     // TODO VALIDATE ACCESS_TOKEN
 

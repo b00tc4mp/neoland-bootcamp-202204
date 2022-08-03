@@ -35,6 +35,7 @@ module.exports = {
     handleAddInterpretationToSong: require('./handleAddInterpretationToSong'),
     handleRetrieveInterpretationsFromSong: require('./handleRetrieveInterpretationsFromSong'),
     handleRetrieveInterpretationFromSong: require('./handleRetrieveInterpretationFromSong'),
+    handleRetrieveLastInterpretationsOfFollowed: require('./handleRetrieveLastInterpretationsOfFollowed'),
 
     /* RANK */
     handleToggleOrUpdateRankToInterpretation: require('./handleToggleOrUpdateRankToInterpretation'),

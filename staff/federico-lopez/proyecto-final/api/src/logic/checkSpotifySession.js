@@ -5,7 +5,6 @@ const { validateObjectId } = require("../validators")
 const Apium = require('../vendor/Apium')
 
 module.exports = async (userId, code) => {
-    debugger
     validateObjectId(userId)
 
     const user = await User.findById(userId)
@@ -15,14 +14,13 @@ module.exports = async (userId, code) => {
     if (code) {
         try {
             const spotifyToken = await requestSpotifyTokenSendingCode(code)
-            debugger
+
             user.spotifySession = spotifyToken
             await user.save()
 
             return true
 
         } catch (error) {
-            debugger
             return false
         }
     }
@@ -42,8 +40,6 @@ module.exports = async (userId, code) => {
                     },
                     body: `grant_type=refresh_token&refresh_token=${user.spotifySession.refresh_token}`
                 })
-
-            debugger
 
             if (status === 200) {
                 const spotifySession = JSON.parse(payload)

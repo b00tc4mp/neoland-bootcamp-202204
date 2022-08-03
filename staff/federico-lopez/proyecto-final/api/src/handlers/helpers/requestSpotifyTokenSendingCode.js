@@ -1,7 +1,7 @@
 const Apium = require('../../vendor/Apium')
 
 module.exports = async code => {
-    debugger
+    
     const api = new Apium(process.env.SPOTIFY_ACCOUNTS_API_URL)
 
     const { status, payload } = await api.post(

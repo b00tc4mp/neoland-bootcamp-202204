@@ -439,11 +439,560 @@ y no encontré ojos así
                      C#
 como los que tienes tú...`
 
+const corasheContent = `[Intro] Em  B7  B7(9-)  Em
+Em  B7  
+
+[Primeira Parte]
+
+Em
+Fuera de mi inverso
+
+Centro como saliva 
+
+Del arce negro estás
+Em/B
+Nunca te dije flaco
+
+Quedate conmigo
+
+Fuiste vos solo nomás
+B7
+¿Cómo pudiste, negro, no leerme? 
+
+Te escribí para en mí no perderme
+B7/A
+Duele la aguja fría
+   B7/F#
+Ahora como agua sobre 
+
+La frente perfora
+Em
+Yo no quería nada más 
+
+Que estar pegaditos un rato
+Em/B
+Te sufrí ahora reposo serena mi canto
+B7
+Limaste, chabón, con la lluvia que hay
+
+Querés que me quede allá afuera
+B7/A
+Querés que me quede allá afuera
+
+[Segunda Parte]
+
+      Em
+Veneno en mi valle
+
+Te hace falta más corashe
+
+Vengo vestida de diabla
+
+Paseo por tu calle
+
+Llevo un vestido Versace
+
+Sé que hará que te rayes
+    D#º
+No hace falta que te vayas
+
+Nene, afrontame
+
+Te hace falta corashe
+B7/F#
+Te hace falta cora-
+
+Te hace falta corashe
+Em
+Derrito medalla pa' 
+
+Convertirme de oro
+
+Y olvidar todas las rayas 
+
+Que te volaste ayer
+
+Voy a perderme a la Habana 
+    
+En busca de placer
+D#º
+Yo callaré, me dijiste no fallaré
+
+Tuviste la belleza
+
+[Refrão]
+
+Te hace falta corashe
+
+Te hace falta corashe
+
+Te hace falta
+
+Te hace falta corashe
+
+Te hace falta corashe
+
+Te hace falta
+
+Te hace falta corashe
+
+Corashe
+
+Co-co-corashe
+
+Corashe
+ Em
+Co-co-corashe
+
+Corashe
+
+Co-co-corashe
+
+Corashe
+ B7/D#
+Co-co-corashe
+
+Corashe
+ B7/F#
+Co-co-corashe
+
+Corashe
+
+[Terceira Parte]
+
+     Em
+Yo soy la mulata
+
+Tengo la boca de plata
+
+Yo que estaba enamorata
+
+Te cantaba serenatas
+
+Acordate que soy Natalia
+       D#º
+Reina de la vigilia
+
+Deja que te combata ya
+B7/F#
+¡Ah, no! Te hace falta corashe
+Em
+Mi catarata
+
+Que a tu cerebro hidrata
+
+¿Y vos por qué te asustaste?
+
+¿Acaso no te comí a besos? 
+
+¿Acaso no te llené el vaso?
+   D#º
+¿Acaso no deberías perder el miedo
+
+A vos mismo para evitar el fracaso?
+B7/F#
+Te hace falta corashe
+            B7/D#
+Te hace falta corashe
+
+[Final] Em  B7/D#  B7/F#  Em`
+
+const buenosAiresContent = `Intro] Bbm9  C7(9-)  Fm7  Eb7(9)
+Bbm9  C7(9-)  Fm7  Bb7(13)
+Bbm9  C7(9-)  Fm7
+Bbm9  C7(9-)  B7M(11+)
+
+[Refrão]
+
+           Bbm7    
+Me empieza a molestar 
+C7(9-)       Fm7   Eb7(9)  Ab7
+Que  haga frío en la ciudad
+       Gm7(11)  C7(9-)     Fm7  Bb7(13)
+No paro de apagar     ese despertador
+        Bbm9   C7(9-)       Fm7
+Cansada de esperar  fumando sola en el balcón
+     Db7M           C7(9-)    B7M(11+)
+Imaginando que alguien me viene a buscar
+
+[Primeira Parte]
+
+Fm7                                        
+Conozco esa pesada 
+          Db7M 
+Sensación de soledad
+  C7(9-)
+Pero a quién esperamos?
+Fm7
+Melancolía barata en la televisión
+ Db7M     C7(9-)
+A dónde va eso a lo que rezamos?
+
+Bbm7(9)             Cm7
+Esa noche me convertí en animal
+Bbm7(9)                  
+Pude ser una aprendiz 
+        Cm      Bm
+De esa ansiada libertad
+Bbm7(9)              Cm
+Es domingo, no me quiero levantar
+  Db7M      
+Suena el timbre
+ Dº             Eb7(9)
+Y allá afuera está lloviendo
+
+[Refrão]
+
+          Bbm7    
+Me empieza a molestar 
+C7(9-)       Fm7  Eb7(9)  Ab7
+Que  haga frío en la ciudad
+      Gm7(11)  C7(9-)     Fm7  Bb7(13)
+No paro de apagar    ese despertador
+       Bbm9   C7(9-)       Fm7
+Cansada de esperar fumando sola en el balcón
+     Db7M           C7(9-)    B7M(11+)
+Imaginando que alguien me viene a buscar
+
+[Segunda Parte]
+
+Bbm9       C7(9-)    Fm7    Ab7(13)
+Apagué el teléfono sin avisar
+Db7M(5-)  C7(9-)      Fm7
+Para qué voy a pedir perdón?
+Bbm7    Cm7         Db7M      
+Si al final  todos buscamos escapar
+         Dm7(5-)   Db7M      
+Escucho que me llaman de afuera
+       C7(4/9)  C7
+Y no sé qué hacer
+
+[Refrão]
+
+          Bbm7    
+Me empieza a molestar 
+C7(9-)       Fm7  Eb7(9)  Ab7
+Que  haga frío en la ciudad
+      Gm7(11)  C7(9-)     Fm7  Bb7(13)
+No paro de apagar    ese despertador
+       Bbm9   C7(9-)       Fm7
+Cansada de esperar fumando sola en el balcón
+     Db7M           C7(9-)    B7M(11+)
+Imaginando que alguien me viene a buscar
+
+[Terceira Parte]
+
+Bbm7(9)       C7(9-)   
+Qué pasará allá afuera? 
+Fm7              Eb7(9)  Ab7
+Comencé a acostumbrarme
+Gm7(11)     C7(9-)   Fm7          Bb7(5-)
+A ese ruido de la vereda,  puedo rebobinar
+ Bbm7(9)          C7(9-) 
+Y poner pausa a lo que suceda
+Fm7
+Pero a las 3 de la mañana
+Eb7(4/9)           Db7M                  B7M(11+)
+Todos nos miramos cuando llueve en la ciudad
+
+[Final] Bbm7(9)  C7(9-)  Fm7  Eb7(9)  Ab7
+Db7M  C7(9-)  Fm7  Bb7
+Bbm7(9)  C7(9-)  Fm7
+Eb7(4/9)  Db7M  B7M(11+)
+Bbm7(9)  C7(9-)  Fm7  Eb7(9)  Ab7
+Db7M  C7(9-)  Fm7  Bb7
+Bbm7(9)  C7(9-)  Fm7
+Eb7(4/9)  Db7M  B7M(11+)`
+
+const businessWomanContent = `Tono: Gm
+[Intro] Gm  Cm  Gm  Cm
+        Gm  Cm  Gm  
+
+Mira, nene, óyeme
+
+Don't play with my ass
+
+'Cause if you play with my ass
+
+You will quemarte
+
+[Refrão]
+
+ Gm
+Me llaman porque 
+         Cm  Gm   D7
+Soy una business woman
+ Gm
+Tengo negocios 
+         Cm  Gm  D7
+Que dirigir yo  sola
+ Gm                     Cm
+Hago guita desde que nací 
+  Gm   D7 
+Bien piola
+ Gm
+Me llaman porque 
+         Cm  Gm   Cm
+Soy una business woman
+
+[Primeira Parte]
+
+         Gm
+Pura amenaza mira
+            D7
+Cómo se lo tira la nenaza
+Gm
+   Todos los pibes
+      D7
+Se rajaron de la plaza
+Gm
+   Flaco bórrate 
+     D7
+Esa cara de caballito
+Gm
+   Después de probarme 
+       D7
+Te quedaste derechito
+Gm
+   Soy una nena mala
+D7
+   Una droga asesina
+Gm
+   Me brillan las tetas
+D7
+   Me queres de vecina
+Gm
+   Me gusta el boxeo
+    D7
+La baba, la rabia
+ Gm           
+Vamos a pegarnos 
+             D7
+Sin los guantes
+
+Sexo sucio
+
+[Pré-Refrão]
+
+ Gm
+Caro carísimo
+                  Gm5+
+Mira cómo se te caen
+        Gm
+Los billetes sin tocarme
+            Gm5+
+Soñaste conmigo
+                    Gm
+Quién cojones eres tú
+                   Gm5+
+Nadie te pidió permiso
+
+Veo tu cara aplastada
+
+De gusto en el piso, bitch
+
+[Refrão]
+
+ Gm
+Me llaman porque 
+         Cm  Gm   D7
+Soy una business woman
+ Gm
+Tengo negocios 
+         Cm  Gm  D7
+Que dirigir yo  sola
+ Gm                     Cm
+Hago guita desde que nací 
+  Gm   D7 
+Bien piola
+ Gm
+Me llaman porque 
+         Cm  Gm   Cm
+Soy una business woman
+
+[Segunda Parte]
+
+         Gm
+Tengo boca jugosa
+      D7
+Y la mente dura
+         Gm
+Soy una bicha sabia
+      D7
+Mi saliva es pura
+     Gm
+Una coco tibia
+      D7
+Mira mi estatura
+       Gm
+Muevo money hasta cuando 
+             D7
+Me hacen la manicura
+       Gm
+Si queres durazno
+         D7
+Aguanta la pelusa
+             Gm
+No quieres que te guste
+            D7
+Porque soy dirty sucia
+       Gm
+Te la puse tiesa 
+        D7
+Con mi ritmo, con mi astucia
+ Gm
+Soy cabrona poniéndote 
+
+El culo en la cara, eh?
+
+[Pré-Refrão]
+
+            Gm
+No te avergüences, tengo poder
+ Gm5+          Gm
+Hago lo que quiero, carajo
+
+Hago la ley
+    Gm5+       Gm
+Me pone mi trabajo
+             
+Te tengo en la cocina 
+        Gm5+              Gm
+Arrodillado moliendo ajo, ay
+
+Soy el diablo si quiero
+
+Un ángel del cielo
+
+Ay cariño ¿qué tomaste?
+
+Todito mi juguito calentito 
+
+Te tragaste
+       Gm
+Mucho peso sobre 
+                     Gm5+
+Mis hombros, mucho drama
+ Gm
+Mírame a los ojos
+
+Chúpame como a una fucking dama
+
+[Refrão]
+
+ Gm
+Me llaman porque 
+         Cm  Gm   D7
+Soy una business woman
+ Gm
+Tengo negocios 
+         Cm  Gm  D7
+Que dirigir yo  sola
+ Gm                     Cm
+Hago guita desde que nací 
+  Gm   D7 
+Bien piola
+ Gm
+Me llaman porque 
+         Cm  Gm   Cm
+Soy una business woman
+
+[Terceira Parte]
+
+     Gm
+I'm business woman 
+      D7
+In a business world
+             Gm
+Cuidado que soy picante
+           D7
+Y esto me da calor 
+     Gm
+I'm business woman 
+      D7
+In a business world
+           Gm
+No tengo tiempo y toda 
+               D7
+Tu guita la manejo yo
+     Gm
+I'm business woman 
+      D7
+In a business world
+             Gm
+Cuidado que soy picante
+           D7
+Y esto me da hmm
+     Gm
+I'm business woman
+      Gm5+
+In a business world
+           Gm
+No tengo tiempo 
+                      D7
+Y toda tu guita la manejo yo
+
+[Terceira Parte]
+
+         Bbm
+La hechicera del mambo
+                Bbm5+
+Te vino a cabalgar
+   Bbm
+Sólo al rapear mis barras
+                  Bbm5+
+Ay te puedo yo matar
+            Bbm
+Tengo las piernas mojaitas
+                  Bbm5+
+No las consigo secar
+            Bbm
+Ay ya me estaba calentando
+              Bbm5+
+De tanto laburar
+       Bbm
+Soy voluminosa latina letal 
+       Bbm5+     Bbm
+Y sugerente soy nena peligrosa
+                    Bbm5+
+Y voy directo a tu mente
+    Bbm
+Pregúntate cuánto odias
+       Bbm5+
+Cuánto amas
+    Bbm
+No vine a dar lección
+                    Bbm5+
+No vine a hacer tu cama
+Bbm
+    Te vi rezándole 
+                   Bbm5+
+A papá en el suelo
+         Bbm
+Ay qué miedo da la oscuridad
+              Bbm5+
+Cuando me lo hagas 
+     Bbm
+Tírame del pelo rindo 
+                  Bbm5+
+Con agua porque puedo
+    Bbm
+Yo corto el roquefort
+                   Bbm5+
+Si queres comer vení 
+        Bbm
+Que yo tengo el tenedor
+
+[Final] Bbm5+  Bbm  Bbm5+  Bbm`
+
 module.exports = {
     laRazonContent1,
     laRazonContent2,
     aTuLadoContent1,
     demasiadoContent1,
     sinSenalContent1,
-    ojosAsiContent1
+    ojosAsiContent1,
+    corasheContent,
+    buenosAiresContent,
+    businessWomanContent
 }

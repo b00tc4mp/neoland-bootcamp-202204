@@ -4,7 +4,7 @@ const { handleErrorsAndRespond } = require("./helpers")
 
 module.exports = async (req, res) => {
     try {
-        debugger
+        
         const { params: { interpretationId } } = req
 
         const interpretation = await retrieveInterpretationFromSong(interpretationId)

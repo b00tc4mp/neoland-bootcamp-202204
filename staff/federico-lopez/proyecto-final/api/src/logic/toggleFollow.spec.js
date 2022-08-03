@@ -42,9 +42,9 @@ describe('toggleFollow', () => {
         await pepitoUser.save()
         await wendyUser.save()
 
-        debugger
+        
         const result = await toggleFollow(pepitoUser._id.toString(), wendyUser._id.toString())
-        debugger
+        
         expect(result).to.be.undefined
 
         const wendy = await User.findById(wendyUser._id)

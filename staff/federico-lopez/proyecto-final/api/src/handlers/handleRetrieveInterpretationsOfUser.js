@@ -3,7 +3,7 @@ const { handleErrorsAndRespond } = require("./helpers")
 
 module.exports = async (req, res) => {
     try {
-        debugger
+        
         let { params: { userId } } = req
 
         const interpretations = await retrieveInterpretationsOfUser(userId)

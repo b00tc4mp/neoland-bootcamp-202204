@@ -64,7 +64,7 @@ describe('createArtist', () => {
 
         } catch (error) {
             expect(error).to.be.instanceOf(ConflictError)
-            debugger
+            
             expect(error.message).to.equal(`invalid country code ZZ`)
         }
     })

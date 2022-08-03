@@ -12,7 +12,7 @@ module.exports = async artistName => {
     if (!artist) throw new NotFoundError(`artist ${artistName} not found`)
 
     const songs = await Song.find({ artist: artist._id }).populate('artist', 'name').lean()
-    debugger
+    
     return songs.map(song => {
         song.id = song._id.toString()
         delete song._id

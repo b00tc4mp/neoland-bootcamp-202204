@@ -3,7 +3,7 @@ const { getTopArtists } = require('../logic')
 
 module.exports = async (req, res) => {
     try {
-        debugger
+        
         const userId = verifyToken(req)
         
         const access_token = await getSpotifySession(userId)

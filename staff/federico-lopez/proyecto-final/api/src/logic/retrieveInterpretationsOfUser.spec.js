@@ -14,6 +14,7 @@ describe('retrieveInterpretationsOfUser', () => {
         await Song.deleteMany()
         await Artist.deleteMany()
         await User.deleteMany()
+        await Interpretation.deleteMany()
 
         user1 = await User.create({ username: 'wendypan', email: 'wendypan@gmail.com', password: 'Passw0rd' })
         user2 = await User.create({ username: 'pepito', email: 'pepitogrillo@gmail.com', password: 'Passw0rd' })
@@ -51,10 +52,12 @@ describe('retrieveInterpretationsOfUser', () => {
         result.forEach(interpretation => {
             expect(interpretation.user).to.equal(user1._id.toString())
             expect(interpretation.content).to.equal(interpretation1.content)
-            expect(interpretation.songName).to.be.string
-            expect(interpretation.artistName).to.be.string
-            expect(interpretation.songId).to.be.string
-            expect(interpretation.artistId).to.be.string
+            expect(interpretation.song.name).to.be.string
+            expect(interpretation.song.artist.name).to.be.string
+            expect(interpretation.song.id).to.be.string
+            expect(interpretation.song.artist.id).to.be.string
+            expect(interpretation.song.artist._id).to.be.undefined
+            expect(interpretation.song._id).to.be.undefined
 
             const some = [interpretation1, interpretation3, interpretation4].some(elem => elem._id.toString() === interpretation.id)
             
@@ -86,6 +89,7 @@ describe('retrieveInterpretationsOfUser', () => {
         await Song.deleteMany()
         await Artist.deleteMany()
         await User.deleteMany()
+        await Interpretation.deleteMany()
     })
 
     after(() => disconnect())

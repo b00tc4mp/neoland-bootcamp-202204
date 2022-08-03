@@ -13,6 +13,7 @@ describe('addInterpretationToSong', () => {
         await Song.deleteMany()
         await Artist.deleteMany()
         await User.deleteMany()
+        await Interpretation.deleteMany()
     })
 
     it('fails on unexisting user', async () => {
@@ -128,6 +129,7 @@ describe('addInterpretationToSong', () => {
         await Song.deleteMany()
         await Artist.deleteMany()
         await User.deleteMany()
+        await Interpretation.deleteMany()
     })
 
     after(() => disconnect())

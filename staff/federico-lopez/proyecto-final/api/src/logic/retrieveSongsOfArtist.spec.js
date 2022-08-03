@@ -30,7 +30,7 @@ describe('retrieveSongsOfArtist', () => {
         const result = await retrieveSongsOfArtist(laRengaTres.name)
 
         expect(result).to.be.instanceOf(Array)
-        debugger
+        
         expect(result).to.have.length(3)
 
         result.forEach(song => {

@@ -15,6 +15,7 @@ describe('addCommentToInterpretation', () => {
         await Song.deleteMany()
         await Artist.deleteMany()
         await User.deleteMany()
+        await Interpretation.deleteMany()
 
         user1 = await User.create({ username: 'wendypan', email: 'wendypan@gmail.com', password: 'Passw0rd' })
         user2 = await User.create({ username: 'pepito', email: 'pepitogrillo@gmail.com', password: 'Passw0rd' })
@@ -128,6 +129,7 @@ describe('addCommentToInterpretation', () => {
         await Song.deleteMany()
         await Artist.deleteMany()
         await User.deleteMany()
+        await Interpretation.deleteMany()
     })
 
     after(() => disconnect())

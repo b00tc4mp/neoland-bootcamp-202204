@@ -2,7 +2,7 @@ const { retrieveSong } = require("../logic")
 const { handleErrorsAndRespond } = require("./helpers")
 
 module.exports = async (req, res) => {
-    debugger
+    
     try {
         let { params: { songName, artistName } } = req
 
