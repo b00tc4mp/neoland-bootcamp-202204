@@ -17,6 +17,7 @@ module.exports = {
     createArtist: require('./createArtist'),
     findArtists: require('./findArtists'),
     getTopArtists: require('./getTopArtists'),
+    retrieveMostVisitedArtists: require('./retrieveMostVisitedArtists'),
 
     /* SONGS */
     createSong: require('./createSong'),
@@ -33,6 +34,7 @@ module.exports = {
     retrieveInterpretationFromSong: require('./retrieveInterpretationFromSong'),
     removeInterpretationFromSong: require('./removeInterpretationFromSong'),
     retrieveLastInterpretationsOfFollowed: require('./retrieveLastInterpretationsOfFollowed'),
+    retrieveMostVisitedInterpretations: require('./retrieveMostVisitedIntepretations'),
 
     /* RANK */
     toggleOrUpdateRankToInterpretation: require('./toggleOrUpdateRankToInterpretation'),

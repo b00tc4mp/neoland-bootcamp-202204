@@ -1,10 +1,10 @@
 import { FlexColSection, Footer, Header, Context, Title2, InterpretationProfileItem } from "../components"
 import { verifyTokenAndRedirect } from "../helpers"
-import { checkSpotifySession, getTopArtists, retrieveUser, retrieveLastInterpretationsOfFollowed } from '../logic'
+import { checkSpotifySession, getTopArtists, retrieveUser, retrieveLastInterpretationsOfFollowed, retrieveMostVisitedInterpretations, retrieveMostVisitedArtists } from '../logic'
 import { useContext, useState } from "react"
 import Link from "next/link";
 
-export default function Home({ isSessionActive, topArtists, user, interpretationsOfFollowed }) {
+export default function Home({ isSessionActive, topArtists, user, interpretationsOfFollowed, mostVisitedInterpretations, mostVisitedArtists }) {
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const { handleDialog } = useContext(Context)
@@ -54,6 +54,31 @@ export default function Home({ isSessionActive, topArtists, user, interpretation
           </div>
         }
 
+        {mostVisitedArtists && mostVisitedArtists.length > 0 &&
+          <div className="py-4 w-full flex flex-col gap-2">
+            <h2 className="px-4 text-xl font-bold text-mygrey">Most popular artists</h2>
+
+            <ul className="px-4 flex items-center overflow-x-auto scrollbar-hide gap-2">
+
+              {mostVisitedArtists.map((artist, index) => {
+                return (
+
+                  <li
+                    className={'min-w-[112px] h-28 rounded-lg ' +
+                      (index % 4 === 0 ? 'bg-gradient-yellow' : index % 4 === 1 ? 'bg-gradient-green' : index % 4 === 2 ? 'bg-gradient-orange' : 'bg-gradient-purple')}
+                    key={index}>
+                    <Link href={`/artist/${artist.name}`}>
+                      <a className="w-full h-full p-2 flex items-end text-xl font-bold text-white">{artist.name}</a>
+                    </Link>
+                  </li>
+
+                )
+              })}
+
+            </ul>
+          </div>
+        }
+
         {interpretationsOfFollowed && interpretationsOfFollowed.length > 0 &&
           <div className="py-4 w-full flex flex-col gap-2">
             <h2 className="px-4 text-xl font-bold text-mygrey">Recent versions from your contacts</h2>
@@ -61,7 +86,21 @@ export default function Home({ isSessionActive, topArtists, user, interpretation
             <ul className="h-48 px-4 flex flex-col items-center overflow-x-auto scrollbar-hide gap-2">
 
               {interpretationsOfFollowed.map(interpretation => {
-                return <InterpretationProfileItem interpretation={interpretation} user={interpretation.user} />                
+                return <InterpretationProfileItem interpretation={interpretation} user={interpretation.user} />
+              })}
+
+            </ul>
+          </div>
+        }
+
+        {mostVisitedInterpretations && mostVisitedInterpretations.length > 0 &&
+          <div className="py-4 w-full flex flex-col gap-2">
+            <h2 className="px-4 text-xl font-bold text-mygrey">Most Popular Interpretations</h2>
+
+            <ul className="h-48 px-4 flex flex-col items-center overflow-x-auto scrollbar-hide gap-2">
+
+              {mostVisitedInterpretations.map(interpretation => {
+                return <InterpretationProfileItem interpretation={interpretation} user={interpretation.user} />
               })}
 
             </ul>
@@ -80,10 +119,11 @@ export async function getServerSideProps(ctx) {
 
   const token = await verifyTokenAndRedirect(req, res)
 
+  const [mostVisitedInterpretations, mostVisitedArtists] = await Promise.all([retrieveMostVisitedInterpretations(), retrieveMostVisitedArtists()])
+
   if (token) {
     const user = await retrieveUser(token)
 
-    
     const interpretationsOfFollowed = await retrieveLastInterpretationsOfFollowed(token)
 
     if (ctx.query.code) {
@@ -92,9 +132,9 @@ export async function getServerSideProps(ctx) {
       if (isSessionActive) {
         const topArtists = await getTopArtists(token)
 
-        return { props: { topArtists, isSessionActive, user, interpretationsOfFollowed } }
+        return { props: { topArtists, isSessionActive, user, interpretationsOfFollowed, mostVisitedInterpretations, mostVisitedArtists } }
 
-      } else return { props: { isSessionActive, user, interpretationsOfFollowed } }
+      } else return { props: { isSessionActive, user, interpretationsOfFollowed, mostVisitedInterpretations, mostVisitedArtists } }
 
     } else {
       const isSessionActive = await checkSpotifySession(token)
@@ -102,10 +142,10 @@ export async function getServerSideProps(ctx) {
       if (isSessionActive) {
         const topArtists = await getTopArtists(token)
 
-        return { props: { topArtists, isSessionActive, user, interpretationsOfFollowed } }
+        return { props: { topArtists, isSessionActive, user, interpretationsOfFollowed, mostVisitedInterpretations, mostVisitedArtists } }
 
-      } else return { props: { isSessionActive, user, interpretationsOfFollowed } }
+      } else return { props: { isSessionActive, user, interpretationsOfFollowed, mostVisitedInterpretations, mostVisitedArtists } }
     }
 
-  } else return { props: {} }
+  } else return { props: { mostVisitedInterpretations, mostVisitedArtists } }
 }

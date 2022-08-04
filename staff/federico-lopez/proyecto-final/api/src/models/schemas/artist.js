@@ -13,6 +13,10 @@ const artist = new Schema({
     country: {
         type: String,
         emun: Object.keys(countries)
+    },
+    visits: {
+        type: Number,
+        default: 0
     }
 })
 

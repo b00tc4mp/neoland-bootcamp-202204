@@ -54,7 +54,12 @@ const bcrypt = require('bcryptjs')
             const artistBandalosChinos = await Artist.create({ name: 'Bandalos Chinos', genres: [Artist.ROCK], country: 'AR' })
             const artistShakira = await Artist.create({ name: 'Shakira', genres: [Artist.POP], country: 'CO' })
             const artistNathyPeluso = await Artist.create({ name: 'Nathy Peluso', genres: [Artist.POP, Artist.TRAP], country: 'AR' })
-            const artistPtazeta = await Artist.create({ name: 'Ptazeta', genres: [Artist.TRAP, Artist.HIP_HOP], country: 'ES' })
+            // const artistPtazeta = await Artist.create({ name: 'Ptazeta', genres: [Artist.TRAP, Artist.HIP_HOP], country: 'ES' })
+            // const artistDivididos = await Artist.create({ name: 'Divididos' })
+            // const artistNickiNicole = await Artist.create({ name: 'Nicky Nicole' })
+            // const artistQuevedo = await Artist.create({ name: 'Quevedo' })
+            // const artistACDC = await Artist.create({ name: 'ACDC' })
+            // const artistAitana = await Artist.create({ name: 'Aitana' })
 
             /* CREATE RANKS */
 

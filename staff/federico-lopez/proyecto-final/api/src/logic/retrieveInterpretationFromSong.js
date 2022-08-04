@@ -10,10 +10,8 @@ module.exports = async interpretationId => {
     .populate({ path: 'user', select: 'username' })
 
     if (!interpretationFound) throw new NotFoundError(`interpretation with id ${interpretationId} not found`)
-    
-    
 
-    interpretationFound.visits.push(Date.now())
+    interpretationFound.visits.push(Date.now())  
     await interpretationFound.save()
 
     interpretationToReturn = interpretationFound._doc

@@ -21,6 +21,7 @@ module.exports = {
     handleCreateArtist: require('./handleCreateArtist'),
     handlefindArtists: require('./handlefindArtists'),
     handleGetTopArtists: require('./handleGetTopArtists'),
+    handleRetrieveMostVisitedArtists: require('./handleRetrieveMostVisitedArtists'),
 
     /* SONGS */
     handleCreateSong: require('./handleCreateSong'),
@@ -36,6 +37,7 @@ module.exports = {
     handleRetrieveInterpretationsFromSong: require('./handleRetrieveInterpretationsFromSong'),
     handleRetrieveInterpretationFromSong: require('./handleRetrieveInterpretationFromSong'),
     handleRetrieveLastInterpretationsOfFollowed: require('./handleRetrieveLastInterpretationsOfFollowed'),
+    handleRetrieveMostVisitedInterpretations: require('./handleRetrieveMostVisitedInterpretations'),
 
     /* RANK */
     handleToggleOrUpdateRankToInterpretation: require('./handleToggleOrUpdateRankToInterpretation'),

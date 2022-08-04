@@ -11,6 +11,9 @@ module.exports = async artistName => {
     
     if (!artist) throw new NotFoundError(`artist ${artistName} not found`)
 
+    artist.visits++
+    await artist.save()
+
     const songs = await Song.find({ artist: artist._id }).populate('artist', 'name').lean()
     
     return songs.map(song => {

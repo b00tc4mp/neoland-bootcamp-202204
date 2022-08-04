@@ -14,10 +14,9 @@ export default function Interpretation({ token, interpretation, user }) {
     const [rankByUser, setRankByUser] = useState(rankByUserRetrieved ? rankByUserRetrieved.amount : null)
 
     const artistName = interpretation.song.artist.name
-    const songId = interpretation.song.id
+    const songId = interpretation.song._id
     const songName = interpretation.song.name
-    const username = interpretation.user.username
-    
+    const username = interpretation.user.username    
     const interpreterId = interpretation.user._id
 
     const rankAverage = calculateInterpretationRankAverage(interpretation.ranks)

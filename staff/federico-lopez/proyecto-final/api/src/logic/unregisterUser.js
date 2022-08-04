@@ -15,6 +15,27 @@ module.exports = async (userId, password) => {
     const match = await bcrypt.compare(password, result.password)
 
     if (!match) throw new AuthError('wrong credentials')
+    debugger
+
+    const usersFollowedByUser = await User.find({ 'followers': userId})
+
+    usersFollowedByUser.forEach(user => {
+        const index = user.followers.findIndex(follower => follower.toString() === userId)
+
+        user.followers.splice(index, 1)
+
+        user.save()
+    })
+
+    const usersFollowingUser = await User.find({ 'following': userId})
+
+    usersFollowingUser.forEach(user => {
+        const index = user.following.findIndex(following => following.toString() === userId)
+
+        user.following.splice(index, 1)
+
+        user.save()
+    })
 
     await User.deleteOne({ _id: userId })
 }

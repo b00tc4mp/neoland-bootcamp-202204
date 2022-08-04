@@ -14,10 +14,10 @@ module.exports = async userId => {
     if (followingUsers.length === 0) return []
 
     const interpretations = await Interpretation.find({ user: { $in: followingUsers } }).populate({ path: 'song', populate: { path: 'artist' } }).lean()
-        .populate({ path: 'song', populate: { path: 'artist' } })
-        .populate({ path: 'user', select: 'username' })
         .sort({ date: -1 })
         .limit(5)
+        .populate({ path: 'song', populate: { path: 'artist' } })
+        .populate({ path: 'user', select: 'username' })
         .lean()
 
     interpretations.forEach(interpretation => {

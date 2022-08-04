@@ -25,6 +25,7 @@ const {
     handleCreateArtist,
     handlefindArtists,
     handleGetTopArtists,
+    handleRetrieveMostVisitedArtists,
 
     /* SONGS */
     handleCreateSong,
@@ -40,6 +41,7 @@ const {
     handleRetrieveInterpretationsFromSong,
     handleRetrieveInterpretationFromSong,
     handleRetrieveLastInterpretationsOfFollowed,
+    handleRetrieveMostVisitedInterpretations,
 
     /* RANK */
     handleToggleOrUpdateRankToInterpretation,
@@ -101,8 +103,8 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         /* ARTISTS */
         routes.post('/artists', jsonBodyParser, handleCreateArtist)
         routes.get('/artists', handlefindArtists)
-
-        routes.post('/artists/top', jsonBodyParser, handleGetTopArtists)
+        routes.post('/artists/top', jsonBodyParser, handleGetTopArtists),
+        routes.get('/artists/most-visited', handleRetrieveMostVisitedArtists)
 
         /* SONGS */
         routes.post('/songs', jsonBodyParser, handleCreateSong)
@@ -115,6 +117,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.get('/artists/:artistName/songs/:songName/interpretations', handleRetrieveInterpretationsFromSong)
         routes.get('/artists/:artistNae/songs/:songName/interpretations/:interpretationId', handleRetrieveInterpretationFromSong)
         routes.get('/interpretations/followed', handleRetrieveLastInterpretationsOfFollowed)
+        routes.get('/interpretations/most-visited', handleRetrieveMostVisitedInterpretations)
         
         /* ARTISTS AND SONGS */
         routes.get('/search', handleFindArtistsSongsAndUsers)
