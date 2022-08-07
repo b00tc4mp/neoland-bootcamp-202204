@@ -42,7 +42,7 @@ function Register(props) {
   logger.info('render')
 
   return isJwtValid(sessionStorage.token) ? <></> : <div>
-    <h1 className='Logo'>Beach space</h1>
+    <h1 className='Logo'>Beach space 🏖</h1>
 
     <form className="Register__form" onSubmit={handleFormSubmit}>
       <input className="Input__register-login" type="text" name="name" placeholder="Name" />
