@@ -5,7 +5,6 @@ const { validateObjectId } = require('../validators')
 function retrieveUser(userId) {
   validateObjectId(userId)
 
-
   return User.findById(userId).lean()
     .then(user => {
       if (!user)

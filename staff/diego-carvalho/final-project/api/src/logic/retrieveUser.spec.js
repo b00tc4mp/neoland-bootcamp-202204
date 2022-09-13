@@ -1,6 +1,5 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User } = require('../models')
-const { AuthError } = require('../errors')
 const retrieveUser = require('./retrieveUser')
 const { expect } = require('chai')
 

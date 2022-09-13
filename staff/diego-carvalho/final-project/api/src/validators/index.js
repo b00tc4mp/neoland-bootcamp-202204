@@ -54,7 +54,6 @@ function validateDate(date, explain = 'date') {
 }
 
 function validateObjectId(id) {
-
   if (ObjectId.isValid(id)) {
     if ((String)(new ObjectId(id)) === id)
       return true;

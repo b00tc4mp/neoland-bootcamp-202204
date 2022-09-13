@@ -56,7 +56,7 @@ function validatePassword(password, explain = 'password') {
     validateStringNotEmptyNoSpaces(password, explain)
 
     if (password.length < 3)
-        throw new FormatError(`${explain} length is lower than 8`)
+        throw new FormatError(`${explain} length is lower than 4`)
 }
 
 
