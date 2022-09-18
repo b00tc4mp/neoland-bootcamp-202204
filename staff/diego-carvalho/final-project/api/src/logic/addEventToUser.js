@@ -1,10 +1,10 @@
 const { User, Event } = require('../models')
 const { NotFoundError, ConflictError } = require('errors')
-const { validateObjectId } = require('validators')
+const { validateStringNotEmptyNoSpaces } = require('validators')
 
 function addEventToUser(eventId, userId) {
-  validateObjectId(eventId)
-  validateObjectId(userId)
+  validateStringNotEmptyNoSpaces(eventId)
+  validateStringNotEmptyNoSpaces(userId)
 
   return Promise.all([Event.findById(eventId), User.findById(userId)])
     .then(([event, user]) => {

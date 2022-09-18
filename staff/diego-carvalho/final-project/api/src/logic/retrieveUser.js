@@ -1,9 +1,9 @@
 const { User } = require('../models')
 const { NotFoundError } = require('errors')
-const { validateObjectId } = require('validators')
+const { validateStringNotEmptyNoSpaces } = require('validators')
 debugger
 function retrieveUser(userId) {
-  validateObjectId(userId)
+  validateStringNotEmptyNoSpaces(userId)
 
   return User.findById(userId).lean()
     .then(user => {

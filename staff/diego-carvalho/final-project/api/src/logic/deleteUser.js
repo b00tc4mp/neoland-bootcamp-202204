@@ -1,9 +1,9 @@
 const { User } = require('../models')
 const { AuthError } = require('errors')
-const { validateObjectId, validatePassword } = require('validators')
+const { validateStringNotEmptyNoSpaces, validatePassword } = require('validators')
 
 function deleteUser(userId, password) {
-  validateObjectId(userId)
+  validateStringNotEmptyNoSpaces(userId)
   validatePassword(password)
 
   return User.findById(userId)
