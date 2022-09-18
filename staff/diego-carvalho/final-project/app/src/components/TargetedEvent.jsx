@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Logger from 'vendor/Loggy'
+import Logger from 'loggy'
 import Context from './Context'
 import deleteTargetedEvent from '../logic/deleteTargetedEvent'
 import './MyEvent.sass'

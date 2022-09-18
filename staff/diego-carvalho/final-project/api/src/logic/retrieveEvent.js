@@ -1,6 +1,6 @@
 const { User, Event } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyNoSpaces } = require('validators')
 
 //HomeEventList
 function retrieveEvent(userId) {

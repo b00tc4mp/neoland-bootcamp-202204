@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import Logger from 'vendor/Loggy'
+import Logger from 'loggy'
 import Context from './Context'
 import saveEvent from '../logic/saveEvent'
 import { isJwtValid } from 'validators'

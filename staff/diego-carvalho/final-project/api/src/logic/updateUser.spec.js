@@ -2,7 +2,7 @@ const { connect, disconnect } = require('mongoose')
 const { User } = require('../models')
 const updateUser = require('./updateUser')
 const { expect } = require('chai')
-const { NotFoundError } = require('../errors')
+const { NotFoundError } = require('errors')
 const { ObjectId } = require('bson')
 
 describe('updateUser', () => {

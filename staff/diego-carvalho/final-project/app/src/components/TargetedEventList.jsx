@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import Logger from 'vendor/Loggy'
+import Logger from 'loggy'
 import Context from './Context'
 import './MyEventList.sass'
 import retrieveTargetedEvent from '../logic/retrieveTargetedEvent'

@@ -1,6 +1,6 @@
 const { User, Event } = require('../models')
-const { validateStringNotEmptyNoSpaces, validateString } = require('../validators')
-const { NotFoundError } = require('../errors')
+const { validateStringNotEmptyNoSpaces, validateString } = require('validators')
+const { NotFoundError } = require('errors')
 
 function updateEvent(userId, eventId, title, description, location, eventDate) {
   validateStringNotEmptyNoSpaces(userId, 'user id')

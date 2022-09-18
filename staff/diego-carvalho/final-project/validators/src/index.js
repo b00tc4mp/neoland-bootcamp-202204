@@ -69,6 +69,7 @@ function validateDate(date, explain = 'date') {
     if (!(date instanceof Date)) throw new TypeError(`${explain} is not Date`)
 }
 
+
 function validateNumber(number, explain = 'number') {
     if (typeof number !== 'number') throw new TypeError(`${explain} is not a number`)
 }

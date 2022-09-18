@@ -1,7 +1,7 @@
 const { User } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateObjectId } = require('../validators')
-
+const { NotFoundError } = require('errors')
+const { validateObjectId } = require('validators')
+debugger
 function retrieveUser(userId) {
   validateObjectId(userId)
 

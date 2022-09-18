@@ -1,6 +1,6 @@
-import Logger from 'vendor/Loggy'
+import Logger from 'loggy'
 import { validateJwt, validatePassword } from 'validators'
-import Apium from 'vendor/Apium'
+import Apium from 'apium'
 
 function updateUserPassword(token, password, newPassword, newPasswordRepeat, callback) {
   const logger = new Logger('updatePassword')

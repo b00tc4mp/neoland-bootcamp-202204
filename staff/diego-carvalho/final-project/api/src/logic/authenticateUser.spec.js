@@ -1,7 +1,7 @@
 const { connect, disconnect } = require('mongoose')
 
 const { User } = require('../models')
-const { AuthError } = require('../errors')
+const { AuthError } = require('errors')
 const authenticateUser = require('./authenticateUser')
 const { expect } = require('chai')
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import Logger from 'vendor/Loggy'
+import Logger from 'loggy'
 import Context from './Context'
 import Login from './Login'
 import Register from './Register'

@@ -1,5 +1,5 @@
-import Logger from 'vendor/Loggy'
-import Apium from 'vendor/Apium'
+import Logger from 'loggy'
+import Apium from 'apium'
 import { validateJwt, validatePassword } from 'validators'
 
 function deleteUser(token, password, callback) {

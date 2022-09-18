@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { NotFoundError } = require('../errors')
+const { NotFoundError } = require('errors')
 const { User, Event } = require('../models')
 const deleteEvent = require('./deleteEvent')
 

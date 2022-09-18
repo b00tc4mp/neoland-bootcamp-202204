@@ -5,7 +5,7 @@ const AuthError = createCustomError('AuthError')
 const ConflictError = createCustomError('ConflictError')
 const NotFoundError = createCustomError('NotFoundError')
 
-export {
+module.exports = {
     FormatError,
     AuthError,
     ConflictError,

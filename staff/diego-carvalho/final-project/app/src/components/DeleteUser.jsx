@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import React from 'react'
-import Logger from 'vendor/Loggy'
+import Logger from 'loggy'
 import Context from './Context'
 import deleteUser from '../logic/deleteUser'
 import { useNavigate } from 'react-router-dom'

@@ -1,6 +1,6 @@
 const { User, Event } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateObjectId, validateString } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateObjectId, validateString } = require('validators')
 
 function createEvent(userId, title, description, location, eventDate) {
   validateObjectId(userId, 'userId')

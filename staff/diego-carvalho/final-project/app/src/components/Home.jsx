@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import Logger from 'vendor/Loggy'
+import Logger from 'loggy'
 import Context from './Context'
 import retrieveUser from '../logic/retrieveUser'
 import MyEventList from './MyEventList'

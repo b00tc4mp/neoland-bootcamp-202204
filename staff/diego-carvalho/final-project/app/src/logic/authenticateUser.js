@@ -1,6 +1,6 @@
-import Logger from 'vendor/Loggy'
+import Logger from 'loggy'
 import { validateEmail, validatePassword } from 'validators'
-import Apium from 'vendor/Apium'
+import Apium from 'apium'
 
 function authenticateUser(email, password, callback) {
   const logger = new Logger('authenticateUser')

@@ -1,5 +1,5 @@
-import Logger from 'vendor/Loggy'
-import Apium from 'vendor/Apium'
+import Logger from 'loggy'
+import Apium from 'apium'
 import { validateJwt, validateStringNotEmptyNoSpaces } from 'validators'
 
 function deleteEvent(token, eventId, callback) {

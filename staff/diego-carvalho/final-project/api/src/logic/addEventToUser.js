@@ -1,6 +1,6 @@
 const { User, Event } = require('../models')
-const { NotFoundError, ConflictError } = require('../errors')
-const { validateObjectId } = require('../validators')
+const { NotFoundError, ConflictError } = require('errors')
+const { validateObjectId } = require('validators')
 
 function addEventToUser(eventId, userId) {
   validateObjectId(eventId)

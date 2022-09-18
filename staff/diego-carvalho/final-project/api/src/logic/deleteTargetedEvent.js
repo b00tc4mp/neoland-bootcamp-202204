@@ -1,5 +1,5 @@
-const { NotFoundError } = require("../errors")
-const { validateStringNotEmptyNoSpaces } = require("../validators")
+const { NotFoundError } = require("errors")
+const { validateStringNotEmptyNoSpaces } = require('validators')
 const { User, Event } = require('../models')
 
 function deleteTargetedEvent(userId, eventId) {

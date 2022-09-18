@@ -114,4 +114,4 @@ class Apium {
     }
 }
 
-export default Apium
+module.exports = Apium

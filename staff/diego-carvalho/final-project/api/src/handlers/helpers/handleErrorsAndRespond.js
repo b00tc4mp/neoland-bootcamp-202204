@@ -1,4 +1,4 @@
-const { ConflictError, FormatError, AuthError, NotFoundError } = require('../../errors')
+const { ConflictError, FormatError, AuthError, NotFoundError } = require('errors')
 
 module.exports = (error, res) => {
     let status = 500
