@@ -1,7 +1,7 @@
 const { NotFoundError } = require("errors")
 const { validateStringNotEmptyNoSpaces } = require('validators')
 const { User, Event } = require('../models')
-
+debugger
 function deleteTargetedEvent(userId, eventId) {
   validateStringNotEmptyNoSpaces(userId, 'user id')
   validateStringNotEmptyNoSpaces(eventId, 'event id')

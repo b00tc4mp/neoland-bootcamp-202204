@@ -64,7 +64,7 @@ describe('addEventToUser', () => {
     })
   })
   debugger
-  describe('addEventToUser', () => {
+  describe('addUsertoEvent', () => {
     let jordiUser
 
     beforeEach(() => {

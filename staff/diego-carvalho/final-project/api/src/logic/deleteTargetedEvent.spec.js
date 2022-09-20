@@ -11,16 +11,16 @@ describe('deleteTargetedEvent', () => {
   beforeEach(() => Event.deleteMany())
 
   describe('when user already exists', () => {
-    let crisUser, brunoUser, diegoUser
+    let diegoUser, crisUser
 
     beforeEach(() => {
       crisUser = new User({ name: 'Cris', email: 'cris@gmail.com', password: '1234' })
-      brunoUser = new User({ name: 'Bruno', email: 'bruno@gmail.com', password: '1234' })
+      // brunoUser = new User({ name: 'Bruno', email: 'bruno@gmail.com', password: '1234' })
       diegoUser = new User({ name: 'Diego', email: 'diego1@gmail.com', password: '1234' })
 
-      return Promise.all([crisUser.save(), brunoUser.save(), diegoUser.save()])
+      return Promise.all([diegoUser.save()])
     })
-    debugger
+
     describe('when user already has events', () => {
       let event1, event2, event3, allEvents
 
@@ -37,7 +37,7 @@ describe('deleteTargetedEvent', () => {
             return diegoUser.save()
           })
       })
-
+      debugger
       it('succeeds on correct data ', () => {
         return deleteTargetedEvent(diegoUser.id, event1.id)
           .then(result => {
@@ -62,7 +62,7 @@ describe('deleteTargetedEvent', () => {
       it('fails when event id does not exist', () => {
         const wrongId = new ObjectId().toString()
 
-        return deleteTargetedEvent(crisUser.id, wrongId)
+        return deleteTargetedEvent(diegoUser.id, wrongId)
           .then(() => {
             throw new Error('it should not reach this point')
           })
